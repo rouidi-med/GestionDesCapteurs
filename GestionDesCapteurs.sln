@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capteurs", "Capteurs\Capteurs.csproj", "{B0C2CB07-109B-4BC4-A8D1-DC785EA37370}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capteurs.Tests", "Capteur.Tests\Capteurs.Tests.csproj", "{AD391BAD-EFC8-41B0-BCBC-C0BE9F9D16A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B0C2CB07-109B-4BC4-A8D1-DC785EA37370}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0C2CB07-109B-4BC4-A8D1-DC785EA37370}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0C2CB07-109B-4BC4-A8D1-DC785EA37370}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD391BAD-EFC8-41B0-BCBC-C0BE9F9D16A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD391BAD-EFC8-41B0-BCBC-C0BE9F9D16A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD391BAD-EFC8-41B0-BCBC-C0BE9F9D16A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD391BAD-EFC8-41B0-BCBC-C0BE9F9D16A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
