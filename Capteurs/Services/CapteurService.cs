@@ -61,7 +61,7 @@ namespace Capteurs.Services
             if (!_memoryCache.TryGetValue(cacheKey, out CapteurDto? capteurDto))
             {
                 // Si le capteur n'est pas dans le cache, on le cherche dans la base de données
-                var capteur = await _context.Capteurs.FindAsync(id);
+                var capteur = await _context.Capteurs.FirstOrDefaultAsync(c => c.Id == id && c.IsActive);
                 if (capteur == null) return null;
 
                 capteurDto = new CapteurDto
@@ -128,7 +128,7 @@ namespace Capteurs.Services
             await using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                var capteur = await _context.Capteurs.FindAsync(id);
+                var capteur = await _context.Capteurs.FirstOrDefaultAsync(c => c.Id == id && c.IsActive); ;
                 if (capteur == null) return false;
 
                 capteur.Nom = capteurDto.Nom;
@@ -162,7 +162,7 @@ namespace Capteurs.Services
             await using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                var capteur = await _context.Capteurs.FindAsync(id);
+                var capteur = await _context.Capteurs.FirstOrDefaultAsync(c => c.Id == id && c.IsActive);
                 if (capteur == null) return false;
 
                 _context.Capteurs.Remove(capteur);

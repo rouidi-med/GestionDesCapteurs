@@ -2,8 +2,10 @@ using Moq;
 using Microsoft.AspNetCore.Mvc;
 using Capteurs.Services.Interfaces;
 using Capteurs.Controllers;
+using Capteurs.Dtos;
+using Capteurs.Constants;
 
-namespace YourNamespace.Tests
+namespace Capteurs.Tests.Units
 {
     public class SensorControllerTests
     {
@@ -44,7 +46,10 @@ namespace YourNamespace.Tests
             var result = await _capteurController.Delete(capteurId);
 
             // Assert
-            var actionResult = Assert.IsType<NotFoundResult>(result);
+            var actionResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal(404, actionResult.StatusCode);
+            var notFoundResponse = actionResult.Value as ErrorResponse;
+            Assert.Equal(ErrorCode.SensorNotFound, notFoundResponse.Code);
         }
 
         [Fact]
@@ -58,8 +63,8 @@ namespace YourNamespace.Tests
             // Assert
             var actionResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.Equal(400, actionResult.StatusCode);
-            var badRequestResponse = actionResult.Value as string;
-            Assert.Equal("Invalid sensor id provided.", badRequestResponse);
+            var badRequestResponse = actionResult.Value as ErrorResponse;
+            Assert.Equal(ErrorCode.InvalidSensorId, badRequestResponse.Code);
         }
 
         [Fact]
@@ -76,6 +81,8 @@ namespace YourNamespace.Tests
             // Assert
             var actionResult = Assert.IsType<ObjectResult>(result);
             Assert.Equal(500, actionResult.StatusCode);
+            var serverErrorResponse = actionResult.Value as ErrorResponse;
+            Assert.Equal(ErrorCode.InternalServerError, serverErrorResponse.Code);
         }
     }
 }

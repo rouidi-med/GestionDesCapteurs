@@ -10,8 +10,6 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -114,8 +112,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Gestion Capteur API v1");
-        options.SwaggerEndpoint("/swagger/v2/swagger.json", "Gestion Capteur API V2");
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Gestion des Capteurs - API - version1");
+        options.SwaggerEndpoint("/swagger/v2/swagger.json", "Gestion des Capteurs - API - version2");
     });
 }
 

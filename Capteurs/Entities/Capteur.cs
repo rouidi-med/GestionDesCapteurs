@@ -20,6 +20,6 @@
         /// <summary>
         /// Indique si capteur est active.
         /// </summary>
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }
