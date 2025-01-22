@@ -8,7 +8,8 @@
 3. [Documentation de l'API](#documentation-de-lapi)
 4. [Tests](#tests)
 5. [Installation et Démarrage](#installation-et-démarrage)
-6. [Conclusion](#conclusion)
+6. [Démonstration de l'API](#démonstration-de-lapi)
+7. [Conclusion](#conclusion)
 
 ## Description de l'API
 
@@ -82,6 +83,10 @@ Des tests unitaires et fonctionnels ont été ajoutés pour le point de terminaison
     ```
 
    L'API sera accessible à l'adresse `https://localhost:5001/swagger/index.html`.
+
+## Démonstration de l'API
+
+   https://go.screenpal.com/watch/cTV3IYnfFnx
 
 ## Conclusion
 
