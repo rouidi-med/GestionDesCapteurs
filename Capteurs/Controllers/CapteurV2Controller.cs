@@ -27,12 +27,14 @@ namespace Capteurs.Controllers
         /// <response code="400">Données invalides fournies.</response>
         /// <response code="401">Informations d'authentification manquantes ou invalides.</response>
         /// <response code="404">Capteur non trouvé.</response>
+        /// <response code="429">Erreur liée à la limite de quota</response>
         /// <response code="500">Erreur interne du serveur.</response>
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(int id)
         {
@@ -79,12 +81,14 @@ namespace Capteurs.Controllers
         /// <response code="400">Données invalides fournies.</response>
         /// <response code="401">Informations d'authentification manquantes ou invalides.</response>
         /// <response code="404">Capteur non trouvé.</response>
+        /// <response code="429">Erreur liée à la limite de quota</response>
         /// <response code="500">Erreur interne du serveur.</response>
         [HttpPut("{id:int}/restore")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Restore(int id)
         {

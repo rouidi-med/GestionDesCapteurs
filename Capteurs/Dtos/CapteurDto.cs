@@ -7,6 +7,7 @@ namespace Capteurs.Dtos
         /// <summary>
         /// L'ID du capteur.
         /// </summary>
+        [Range(1, int.MaxValue, ErrorMessage = "L'ID du capteur doit être supérieur à zéro.")]
         public int Id { get; set; }
 
         /// <summary>

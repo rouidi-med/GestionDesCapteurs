@@ -28,10 +28,12 @@ namespace Capteurs.Controllers
         /// <returns>La liste des capteurs.</returns>
         /// <response code="200">Liste des capteurs récupérée avec succès.</response>
         /// <response code="401">Informations d'authentification manquantes ou invalides.</response>
+        /// <response code="429">Erreur liée à la limite de quota</response>
         /// <response code="500">Erreur interne du serveur.</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CapteurDto>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
         {
@@ -57,16 +59,29 @@ namespace Capteurs.Controllers
         /// <param name="id">L'identifiant du capteur.</param>
         /// <returns>Le capteur demandé.</returns>
         /// <response code="200">Capteur récupéré avec succès.</response>
+        /// <response code="400">Données invalides.</response>
         /// <response code="401">Informations d'authentification manquantes ou invalides.</response>
         /// <response code="404">Capteur non trouvé.</response>
+        /// <response code="429">Erreur liée à la limite de quota</response>
         /// <response code="500">Erreur interne du serveur.</response>
         [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CapteurDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetById(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest(new ErrorResponse
+                {
+                    Code = ErrorCode.InvalidSensorId,
+                    Message = "L'ID du capteur doit être supérieur à zéro."
+                });
+            }
+
             try
             {
                 var sensor = await _sensorService.GetCapteurByIdAsync(id);
@@ -100,11 +115,13 @@ namespace Capteurs.Controllers
         /// <response code="201">Capteur créé avec succès.</response>
         /// <response code="400">Données invalides fournies.</response>
         /// <response code="401">Informations d'authentification manquantes ou invalides.</response>
+        /// <response code="429">Erreur liée à la limite de quota</response>
         /// <response code="500">Erreur interne du serveur.</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CapteurDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody] CapteurDto sensorDto)
         {
@@ -141,13 +158,17 @@ namespace Capteurs.Controllers
         /// <param name="sensorDto">Les nouveaux détails du capteur.</param>
         /// <returns>Aucune réponse si la mise à jour est réussie.</returns>
         /// <response code="204">Mise à jour réussie.</response>
+        /// <response code="400">Données invalides.</response>
         /// <response code="401">Informations d'authentification manquantes ou invalides.</response>
         /// <response code="404">Capteur non trouvé.</response>
+        /// <response code="429">Erreur liée à la limite de quota</response>
         /// <response code="500">Erreur interne du serveur.</response>
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Update(int id, [FromBody] CapteurDto sensorDto)
         {
@@ -192,15 +213,17 @@ namespace Capteurs.Controllers
         /// <param name="id">L'identifiant du capteur à supprimer.</param>
         /// <returns>Aucune réponse si la suppression est réussie.</returns>
         /// <response code="204">Suppression réussie.</response>
+        /// <response code="400">Données invalides.</response>
         /// <response code="401">Informations d'authentification manquantes ou invalides.</response>
         /// <response code="404">Capteur non trouvé.</response>
-        /// <response code="400">Données invalides.</response>
+        /// <response code="429">Erreur liée à la limite de quota</response>
         /// <response code="500">Erreur interne du serveur.</response>
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(int id)
         {
@@ -209,7 +232,7 @@ namespace Capteurs.Controllers
                 return BadRequest(new ErrorResponse
                 {
                     Code = ErrorCode.InvalidSensorId,
-                    Message = "L'identifiant fourni est invalide."
+                    Message = "L'ID du capteur doit être supérieur à zéro."
                 });
             }
 

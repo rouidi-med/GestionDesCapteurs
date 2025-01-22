@@ -86,7 +86,8 @@ Des tests unitaires et fonctionnels ont été ajoutés pour le point de terminaison
 
 ## Démonstration de l'API
 
-   https://go.screenpal.com/watch/cTV3IYnfFnx
+   - https://somup.com/cTV321Khus
+   - https://somup.com/cTV32QKhUo
 
 ## Conclusion
 
