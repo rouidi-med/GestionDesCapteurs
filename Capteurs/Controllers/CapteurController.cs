@@ -35,6 +35,7 @@ namespace Capteurs.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesErrorResponseType(typeof(ErrorResponse))]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -71,6 +72,7 @@ namespace Capteurs.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesErrorResponseType(typeof(ErrorResponse))]
         public async Task<IActionResult> GetById(int id)
         {
             if (id <= 0)
@@ -123,6 +125,7 @@ namespace Capteurs.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesErrorResponseType(typeof(ErrorResponse))]
         public async Task<IActionResult> Create([FromBody] CapteurDto sensorDto)
         {
             if (!ModelState.IsValid)
@@ -170,6 +173,7 @@ namespace Capteurs.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesErrorResponseType(typeof(ErrorResponse))]
         public async Task<IActionResult> Update(int id, [FromBody] CapteurDto sensorDto)
         {
             if (!ModelState.IsValid)
@@ -225,6 +229,7 @@ namespace Capteurs.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesErrorResponseType(typeof(ErrorResponse))]
         public async Task<IActionResult> Delete(int id)
         {
             if (id <= 0)

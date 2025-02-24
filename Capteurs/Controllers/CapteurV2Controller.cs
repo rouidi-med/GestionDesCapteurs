@@ -36,6 +36,7 @@ namespace Capteurs.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesErrorResponseType(typeof(ErrorResponse))]
         public async Task<IActionResult> Delete(int id)
         {
             if (id <= 0)
@@ -90,6 +91,7 @@ namespace Capteurs.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesErrorResponseType(typeof(ErrorResponse))]
         public async Task<IActionResult> Restore(int id)
         {
             if (id <= 0)
